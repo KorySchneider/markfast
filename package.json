@@ -22,6 +22,7 @@
   "homepage": "https://github.com/koryschneider/marksite#readme",
   "dependencies": {
     "express": "^4.15.4",
+    "express-fileupload": "^0.2.0",
     "markdown": "^0.5.0"
   }
 }
