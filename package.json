@@ -1,0 +1,27 @@
+{
+  "name": "marksite",
+  "version": "1.0.0",
+  "description": "Static sites from markdown files",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koryschneider/marksite.git"
+  },
+  "keywords": [
+    "markdown",
+    "site-generator"
+  ],
+  "author": "Kory Schneider",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koryschneider/marksite/issues"
+  },
+  "homepage": "https://github.com/koryschneider/marksite#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "markdown": "^0.5.0"
+  }
+}
