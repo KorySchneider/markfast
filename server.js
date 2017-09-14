@@ -1,6 +1,6 @@
 'use strict';
 
-const expres = require('express'),
+const express = require('express'),
       md     = require('markdown'),
       PORT   = 3000,
       log    = console.log,
