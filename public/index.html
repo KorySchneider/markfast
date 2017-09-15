@@ -13,29 +13,62 @@
         justify-content: center;
         align-items: center;
       }
-      #file-input {
-        display: none;
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
+      #wrapper {
+        width: auto;
+        margin: auto;
       }
     </style>
   </head>
 
   <body>
-    <div id='name-div'>
-      <label for='name-input'>Link name:</label>
-      <input id='name-input' />
-    </div>
+    <div id='wrapper'>
 
-    <br>
+      <form action='/create' method='POST' encType='multipart/form-data'>
+        <div id='name-div'>
+          <p id='formatted-name'></p>
+          <br>
+          <label for='name-input'>Link name:</label>
+          <input id='name-input' autofocus />
+        </div>
 
-    <div id='file-div'>
-      <label for='file-input'>Click to select file...</label>
-      <input type='file' id='file-input' />
+        <br>
+
+        <input type='file' id='file-input' name='md-file' accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' />
+
+        <br>
+
+        <button type='submit' id='create-btn'>Create Site</button>
+      </form>
+
     </div>
   </body>
+
+  <script>
+    'use strict';
+
+    window.onload = () => {
+      // Name change handler
+      document.querySelector('#name-input').addEventListener('keyup', (e) => {
+        let formatted = formatNameString(document.querySelector('#name-input').value);
+        document.querySelector('#formatted-name').innerHTML = (formatted == '')
+          ? ''
+          : `Will appear as: marksite.com/${formatted}`;
+      });
+    };
+
+    function formatNameString(s) {
+      const validChars = '1234567890-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      let output = '';
+
+      for (let i=0; i < s.length; i++) {
+        if (validChars.includes(s[i])) {
+          output += s[i];
+        } else {
+          output += '-';
+        }
+      }
+
+      return output;
+    }
+  </script>
 </html>
