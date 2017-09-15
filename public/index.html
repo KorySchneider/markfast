@@ -23,17 +23,17 @@
   <body>
     <div id='wrapper'>
 
-      <form action='/create' method='POST' encType='multipart/form-data'>
+      <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
         <div id='name-div'>
           <p id='formatted-name'></p>
           <br>
           <label for='name-input'>Link name:</label>
-          <input id='name-input' autofocus />
+          <input id='name-input' name='linkName' autofocus />
         </div>
 
         <br>
 
-        <input type='file' id='file-input' name='md-file' accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' />
+        <input type='file' id='file-input' name='mdFile' accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' />
 
         <br>
 
@@ -47,12 +47,19 @@
     'use strict';
 
     window.onload = () => {
-      // Name change handler
+      // Show what formatted URL will look like
       document.querySelector('#name-input').addEventListener('keyup', (e) => {
         let formatted = formatNameString(document.querySelector('#name-input').value);
         document.querySelector('#formatted-name').innerHTML = (formatted == '')
           ? ''
-          : `Will appear as: marksite.com/${formatted}`;
+          : `Will appear as: marksite.com/render/${formatted}`;
+      });
+
+      // Format link name before submitting form
+      document.querySelector('#creation-form').addEventListener('submit', () => {
+        let input = document.querySelector('#name-input');
+        input.value = formatNameString(input.value);
+        return true;
       });
     };
 

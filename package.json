@@ -4,7 +4,9 @@
   "description": "Static sites from markdown files",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db": "mongod --dbpath=data",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,10 @@
   },
   "homepage": "https://github.com/koryschneider/marksite#readme",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "express": "^4.15.4",
     "express-fileupload": "^0.2.0",
-    "markdown": "^0.5.0"
+    "markdown": "^0.5.0",
+    "mongodb": "^2.2.31"
   }
 }
