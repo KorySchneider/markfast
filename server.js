@@ -25,7 +25,7 @@ app.post('/create', (req, res) => {
       col.insert({ content: req.files.mdFile.data.toString() }, (err, docs) => {
         if (err == null) {
           let createdID = docs.insertedIds[0];
-          res.send(`Created document: ${createdID}`);
+          res.redirect(`/render/${createdID}`);
         } else
           console.log(`Creation error: ${err}`);
       });
