@@ -3,7 +3,12 @@
 const express     = require('express'),
       fileUpload  = require('express-fileupload'),
       bodyParser  = require('body-parser'),
-      md          = require('markdown-it')(),
+      md          = require('markdown-it')({
+                      'html': true,
+                      'breaks': true,
+                      'linkify': true,
+                      'typographer': true
+                    }),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
       PORT        = 3000,
