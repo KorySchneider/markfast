@@ -3,7 +3,7 @@
 const express     = require('express'),
       fileUpload  = require('express-fileupload'),
       bodyParser  = require('body-parser'),
-      markdown    = require('markdown').markdown,
+      markdown    = require('markdown-it')(),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
       PORT        = 3000,
@@ -54,41 +54,6 @@ app.get('/render/:id', (req, res) => {
     db.close();
   });
 });
-
-//app.post('/create', (req, res) => {
-//  MongoClient.connect(DB_URL, (err, db) => {
-//    if (err == null) {
-//      const col = db.collection('sites');
-//      let linkName = req.body.linkName;
-//      let fileContents = req.files.mdFile.data.toString();
-//
-//      col.insertOne({
-//        name: linkName,
-//        content: fileContents
-//      }, (err, r) => {
-//        if (err) console.log(`Creation error: ${err}`);
-//      });
-//    } // TODO else error
-//    db.close();
-//  });
-//
-//  res.send('created TODO redirect?');
-//});
-
-//app.get('/render/:name', (req, res) => {
-//  MongoClient.connect(DB_URL, (err, db) => {
-//    if (err == null) {
-//      const col = db.collection('sites');
-//      col.find({ name: req.params.name }).toArray((err, docs) => {
-//        console.log(docs);
-//      });
-//      //TODO render markdown
-//    }
-//    db.close();
-//  });
-//
-//  res.send('render: ' + req.params.name);
-//});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
