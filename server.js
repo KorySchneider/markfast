@@ -8,7 +8,9 @@ const express     = require('express'),
                       'breaks': true,
                       'linkify': true,
                       'typographer': true
-                    }),
+                    })
+                    .use(require('markdown-it-sub'))
+                    .use(require('markdown-it-sup')),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
       PORT        = 3000,
