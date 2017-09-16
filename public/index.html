@@ -123,6 +123,7 @@
         if (fileSelected()) {
           document.querySelector('#selected-file > p').innerText = document.querySelector('#file-input').value;
           document.querySelector('#selected-file').style.display = 'inherit';
+          document.querySelector('#selected-file').style.visibility = 'visible';
           document.querySelector('#filetypes').style.display = 'none';
         }
       });
