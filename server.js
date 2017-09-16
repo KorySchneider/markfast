@@ -85,6 +85,9 @@ app.get('/render/:id', (req, res) => {
       a:visited {
         color: #303030;
       }
+      img {
+        max-width: 90vw;
+      }
 
       /* Desktop */
       @media screen and (min-width: 768px) {
