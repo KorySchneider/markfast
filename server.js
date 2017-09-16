@@ -42,6 +42,36 @@ app.post('/create', (req, res) => {
 });
 
 app.get('/render/:id', (req, res) => {
+  const renderHTMLStart = `\
+<!doctype html>
+<html>
+  <head>
+    <title>marksite</title>
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+      }
+      body {
+        color: #303030;
+        background-color: #E0DDCF;
+      }
+      #md {
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id='md'>
+`;
+
+  const renderHTMLEnd = `
+    </div>
+  </body>
+</html>
+`;
+
   let id = new ObjectId(req.params.id); // TODO this sometimes throws an error but seems to always work
   MongoClient.connect(DB_URL, (err, db) => {
     if (err == null) {
