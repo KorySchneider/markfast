@@ -8,11 +8,20 @@ const express     = require('express'),
       PORT        = 3000,
       DB_URL      = 'mongodb://localhost:27017/marksite',
       app         = express(),
+      hljs        = require('highlight.js'),
       md          = require('markdown-it')({
                       'html': true,
                       'breaks': true,
                       'linkify': true,
-                      'typographer': true
+                      'typographer': true,
+                      'highlight': (str, lang) => {
+                        if (lang && hljs.getLanguage(lang)) {
+                          try {
+                            return hljs.highlight(lang, str).value;
+                          } catch(__) {}
+                        }
+                        return '';
+                      }
                     })
                     .use(require('markdown-it-sub'))
                     .use(require('markdown-it-sup'))
@@ -60,6 +69,7 @@ app.get('/render/:id', (req, res) => {
     <title>marksite</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
     <style>
       html, body {
         height: 100%;
@@ -109,6 +119,7 @@ app.get('/render/:id', (req, res) => {
   const renderHTMLEnd = `
     </div>
   </body>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 </html>`;
 
   let id = new ObjectId(req.params.id); // TODO this sometimes throws an error but seems to always work
