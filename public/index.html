@@ -22,60 +22,11 @@
 
   <body>
     <div id='wrapper'>
-
       <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
-        <div id='name-div'>
-          <p id='formatted-name'></p>
-          <br>
-          <label for='name-input'>Link name:</label>
-          <input id='name-input' name='linkName' autofocus />
-        </div>
-
-        <br>
-
         <input type='file' id='file-input' name='mdFile' accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' />
-
-        <br>
-
+        <br><br>
         <button type='submit' id='create-btn'>Create Site</button>
       </form>
-
     </div>
   </body>
-
-  <script>
-    'use strict';
-
-    window.onload = () => {
-      // Show what formatted URL will look like
-      document.querySelector('#name-input').addEventListener('keyup', (e) => {
-        let formatted = formatNameString(document.querySelector('#name-input').value);
-        document.querySelector('#formatted-name').innerHTML = (formatted == '')
-          ? ''
-          : `Will appear as: marksite.com/render/${formatted}`;
-      });
-
-      // Format link name before submitting form
-      document.querySelector('#creation-form').addEventListener('submit', () => {
-        let input = document.querySelector('#name-input');
-        input.value = formatNameString(input.value);
-        return true;
-      });
-    };
-
-    function formatNameString(s) {
-      const validChars = '1234567890-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-      let output = '';
-
-      for (let i=0; i < s.length; i++) {
-        if (validChars.includes(s[i])) {
-          output += s[i];
-        } else {
-          output += '-';
-        }
-      }
-
-      return output;
-    }
-  </script>
 </html>

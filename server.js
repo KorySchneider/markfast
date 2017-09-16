@@ -5,9 +5,9 @@ const express     = require('express'),
       bodyParser  = require('body-parser'),
       markdown    = require('markdown').markdown,
       MongoClient = require('mongodb').MongoClient,
+      ObjectId    = require('mongodb').ObjectId,
       PORT        = 3000,
-      DB_PORT     = 27017,
-      databaseURL = `mongodb://localhost:${DB_PORT}/`,
+      DB_URL      = 'mongodb://localhost:27017/marksite',
       app         = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -19,39 +19,76 @@ app.get('/', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
-  MongoClient.connect(databaseURL, (err, db) => {
+  MongoClient.connect(DB_URL, (err, db) => {
     if (err == null) {
       const col = db.collection('sites');
-      let linkName = req.body.linkName;
-      let fileContents = req.files.mdFile.data.toString();
-
-      col.insertOne({
-        name: linkName,
-        content: fileContents
-      }, (err, r) => {
-        if (err) console.log(`Creation error: ${err}`);
+      col.insert({ content: req.files.mdFile.data.toString() }, (err, docs) => {
+        let createdID = docs.insertedIds[0];
+        res.send(`Created document: ${createdID}`);
       });
-    } // TODO else error
+    } else {
+      console.log(`Creation error: ${err}`);
+    }
+
     db.close();
   });
-
-  res.send('created TODO redirect?');
 });
 
-app.get('/render/:name', (req, res) => {
-  MongoClient.connect(databaseURL, (err, db) => {
+app.get('/render/:id', (req, res) => {
+  let id = new ObjectId(req.params.id);
+  MongoClient.connect(DB_URL, (err, db) => {
     if (err == null) {
       const col = db.collection('sites');
-      col.find({ name: req.params.name }).toArray((err, docs) => {
-        console.log(docs);
+      col.findOne({ _id: id }, {}, (err, doc) => {
+        if (err == null) {
+          console.log('doc' + doc);
+          res.send(markdown.toHTML(doc.content));
+        } else {
+          console.log(`Render error: ${err}`);
+          res.send('Not found :^(');
+        }
       });
-      //TODO render markdown
+    } else {
+      console.log(err);
     }
     db.close();
   });
-
-  res.send('render: ' + req.params.name);
 });
+
+//app.post('/create', (req, res) => {
+//  MongoClient.connect(DB_URL, (err, db) => {
+//    if (err == null) {
+//      const col = db.collection('sites');
+//      let linkName = req.body.linkName;
+//      let fileContents = req.files.mdFile.data.toString();
+//
+//      col.insertOne({
+//        name: linkName,
+//        content: fileContents
+//      }, (err, r) => {
+//        if (err) console.log(`Creation error: ${err}`);
+//      });
+//    } // TODO else error
+//    db.close();
+//  });
+//
+//  res.send('created TODO redirect?');
+//});
+
+//app.get('/render/:name', (req, res) => {
+//  MongoClient.connect(DB_URL, (err, db) => {
+//    if (err == null) {
+//      const col = db.collection('sites');
+//      col.find({ name: req.params.name }).toArray((err, docs) => {
+//        console.log(docs);
+//      });
+//      //TODO render markdown
+//    }
+//    db.close();
+//  });
+//
+//  res.send('render: ' + req.params.name);
+//});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
