@@ -61,7 +61,7 @@ app.get('/render/:id', (req, res) => {
         font-size: 1.05em;
       }
       #md {
-        max-width: 800px;
+        width: 90vw;
         margin: 4vh 5vw;
       }
       #md h1 {
@@ -74,11 +74,13 @@ app.get('/render/:id', (req, res) => {
         color: #303030;
       }
 
+      /* Desktop */
       @media screen and (min-width: 768px) {
         body {
           font-size: 1.15em;
         }
         #md {
+          max-width: 800px;
           margin: 4vh auto;
         }
       }
