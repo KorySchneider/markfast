@@ -18,7 +18,8 @@ const express     = require('express'),
                     .use(require('markdown-it-sup'))
                     .use(require('markdown-it-footnote'))
                     .use(require('markdown-it-abbr'))
-                    .use(require('markdown-it-emoji'));
+                    .use(require('markdown-it-emoji'))
+                    .use(require('markdown-it-katex'));
 
 app.use(express.static(__dirname + '/public'));
 app.use(fileUpload());
@@ -58,6 +59,7 @@ app.get('/render/:id', (req, res) => {
   <head>
     <title>marksite</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
     <style>
       html, body {
         height: 100%;
