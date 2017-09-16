@@ -3,7 +3,7 @@
 const express     = require('express'),
       fileUpload  = require('express-fileupload'),
       bodyParser  = require('body-parser'),
-      markdown    = require('markdown-it')(),
+      md          = require('markdown-it')(),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
       PORT        = 3000,
@@ -47,6 +47,7 @@ app.get('/render/:id', (req, res) => {
 <html>
   <head>
     <title>marksite</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'/>
     <style>
       html, body {
         height: 100%;
@@ -56,8 +57,30 @@ app.get('/render/:id', (req, res) => {
       body {
         color: #303030;
         background-color: #E0DDCF;
+        font-family: sans-serif;
+        font-size: 1.05em;
       }
       #md {
+        max-width: 800px;
+        margin: 4vh 5vw;
+      }
+      #md h1 {
+        text-align: center;
+      }
+      a {
+        color: #B1CC74;
+      }
+      a:visited {
+        color: #303030;
+      }
+
+      @media screen and (min-width: 768px) {
+        body {
+          font-size: 1.15em;
+        }
+        #md {
+          margin: 4vh auto;
+        }
       }
     </style>
   </head>
@@ -69,8 +92,7 @@ app.get('/render/:id', (req, res) => {
   const renderHTMLEnd = `
     </div>
   </body>
-</html>
-`;
+</html>`;
 
   let id = new ObjectId(req.params.id); // TODO this sometimes throws an error but seems to always work
   MongoClient.connect(DB_URL, (err, db) => {
@@ -78,7 +100,8 @@ app.get('/render/:id', (req, res) => {
       const col = db.collection('sites');
       col.findOne({ _id: id }, {}, (err, doc) => {
         if (err == null) {
-          res.send(markdown.render(doc.content));
+          let render = renderHTMLStart + md.render(doc.content) + renderHTMLEnd;
+          res.send(render);
         } else {
           console.log(`Render error: ${err}`);
           res.send('Not found :^(');
