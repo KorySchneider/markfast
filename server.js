@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/create', (req, res) => {
+  if (req.files.mdFile == undefined) {
+    res.redirect('/');
+    return;
+  }
   MongoClient.connect(DB_URL, (err, db) => {
     if (err == null) {
       const col = db.collection('sites');
@@ -38,7 +42,7 @@ app.post('/create', (req, res) => {
 });
 
 app.get('/render/:id', (req, res) => {
-  let id = new ObjectId(req.params.id);
+  let id = new ObjectId(req.params.id); // TODO this sometimes throws an error but seems to always work
   MongoClient.connect(DB_URL, (err, db) => {
     if (err == null) {
       const col = db.collection('sites');
