@@ -16,7 +16,8 @@ const express     = require('express'),
                     })
                     .use(require('markdown-it-sub'))
                     .use(require('markdown-it-sup'))
-                    .use(require('markdown-it-footnote'));
+                    .use(require('markdown-it-footnote'))
+                    .use(require('markdown-it-abbr'));
 
 app.use(express.static(__dirname + '/public'));
 app.use(fileUpload());
