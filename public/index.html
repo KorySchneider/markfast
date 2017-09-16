@@ -5,6 +5,7 @@
     <style>
       html, body {
         height: 100%;
+        width: 100%;
         margin: 0;
       }
       body {
@@ -12,10 +13,46 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        font-family: sans-serif;
+        color: #303030;
+        background-color: #829399;
       }
       #wrapper {
         width: auto;
         margin: auto;
+        margin-top: 25vh;
+        font-size: 1.15em;
+        text-align: center;
+        max-width: 170px;
+      }
+      label {
+        cursor: pointer;
+      }
+      .btn {
+        padding: 10px 15px;
+        margin-top: 10vh;
+        border-radius: 4px;
+        background-color: #E0DDCF;
+        cursor: pointer;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition-duration: 0.2s;
+      }
+      .btn:hover {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        filter: brightness(85%);
+      }
+      .btn:active {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      }
+      #filetypes {
+        opacity: 0;
+        margin-top: 10px;
+        padding: 5px;
+        float: right;
+        font-size: 12px;
+      }
+      label[for='file-input']:hover ~ #filetypes {
+        opacity: 100;
       }
     </style>
   </head>
@@ -23,10 +60,37 @@
   <body>
     <div id='wrapper'>
       <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
-        <input type='file' id='file-input' name='mdFile' accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' />
-        <br><br>
-        <button type='submit' id='create-btn'>Create Site</button>
+        <label for='file-input'>
+          <div class='btn'>
+            1. Select File
+            <input type='file' id='file-input' name='mdFile' accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' hidden/>
+          </div>
+        </label>
+        <span id='filetypes'><b>Accepted Filetypes</b><br>.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt</span>
+        <br>
+        <label for='create-btn'>
+          <div class='btn'>
+            2. Create Site
+            <button type='submit' id='create-btn' hidden></button>
+          </div>
+        </label>
       </form>
     </div>
   </body>
+
+  <script>
+    window.onload = function() {
+      document.querySelector('#creation-form').addEventListener('submit', () => {
+        return fileSelected();
+      });
+
+      document.querySelector('label[for="file-input"]').addEventListener('click', () => {
+        return fileSelected();
+      });
+    }
+
+    function fileSelected() {
+      return (document.querySelector('#file-input').value != '');
+    }
+  </script>
 </html>
