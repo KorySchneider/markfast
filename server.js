@@ -3,6 +3,11 @@
 const express     = require('express'),
       fileUpload  = require('express-fileupload'),
       bodyParser  = require('body-parser'),
+      MongoClient = require('mongodb').MongoClient,
+      ObjectId    = require('mongodb').ObjectId,
+      PORT        = 3000,
+      DB_URL      = 'mongodb://localhost:27017/marksite',
+      app         = express(),
       md          = require('markdown-it')({
                       'html': true,
                       'breaks': true,
@@ -10,12 +15,8 @@ const express     = require('express'),
                       'typographer': true
                     })
                     .use(require('markdown-it-sub'))
-                    .use(require('markdown-it-sup')),
-      MongoClient = require('mongodb').MongoClient,
-      ObjectId    = require('mongodb').ObjectId,
-      PORT        = 3000,
-      DB_URL      = 'mongodb://localhost:27017/marksite',
-      app         = express();
+                    .use(require('markdown-it-sup'))
+                    .use(require('markdown-it-footnote'));
 
 app.use(express.static(__dirname + '/public'));
 app.use(fileUpload());

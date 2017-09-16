@@ -27,6 +27,7 @@
     "express": "^4.15.4",
     "express-fileupload": "^0.2.0",
     "markdown-it": "^8.4.0",
+    "markdown-it-footnote": "^3.0.1",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "mongodb": "^2.2.31"
