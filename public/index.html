@@ -16,44 +16,69 @@
         align-items: center;
         font-family: sans-serif;
         color: #303030;
-        background-color: #829399;
+        background-color: #E0DDCF;
       }
       #wrapper {
         width: auto;
         margin: auto;
-        margin-top: 25vh;
+        margin-top: 12vh;
         font-size: 1.15em;
         text-align: center;
-        max-width: 170px;
+        width: 170px;
       }
       label {
         cursor: pointer;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
       }
       .btn {
         padding: 10px 15px;
-        margin-top: 10vh;
+        margin-top: 14vh;
         border-radius: 4px;
-        background-color: #E0DDCF;
+        background-color: #ACCC61;
         cursor: pointer;
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         transition-duration: 0.2s;
       }
-      .btn:hover {
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-        filter: brightness(85%);
-      }
       .btn:active {
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
       }
-      #filetypes {
-        opacity: 0;
-        margin-top: 10px;
+      .msg {
+        margin: auto;
+        margin-top: 15px;
         padding: 5px;
-        float: right;
         font-size: 12px;
+        text-align: center;
       }
-      label[for='file-input']:hover ~ #filetypes {
-        opacity: 100;
+      .msg > p {
+        margin-top: 3px;
+      }
+      #selected-file {
+        display: none;
+      }
+
+      /* Desktop */
+      @media screen and (min-width: 768px) {
+        #wrapper {
+          margin-top: 25vh;
+        }
+        .btn {
+          margin-top: 10vh;
+        }
+        .btn:hover {
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+          filter: brightness(85%);
+        }
+        .msg {
+          visibility: hidden;
+        }
+        label[for='file-input']:hover ~ #filetypes {
+          visibility: inherit;
+        }
       }
     </style>
   </head>
@@ -61,6 +86,7 @@
   <body>
     <div id='wrapper'>
       <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
+
         <label for='file-input'>
           <div class='btn'>
             1. Select File
@@ -68,23 +94,40 @@
               accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' hidden/>
           </div>
         </label>
-        <span id='filetypes'>
-          <b>Accepted Filetypes</b>
-          <br>
-          .markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt</span>
-        <br>
+
+        <div id='selected-file' class='msg'>
+          <b>Selected File</b><br>
+          <p></p>
+        </div>
+
+        <div id='filetypes' class='msg'>
+          <b>Accepted Filetypes</b><br>
+          <p>.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt</p>
+        </div>
+
         <label for='create-btn'>
           <div class='btn'>
             2. Create Site
             <button type='submit' id='create-btn' hidden></button>
           </div>
         </label>
+
       </form>
     </div>
   </body>
 
   <script>
     window.onload = function() {
+      // When file selected, display selected file and hide filetype message
+      document.querySelector('#file-input').addEventListener('change', () => {
+        if (fileSelected()) {
+          document.querySelector('#selected-file > p').innerText = document.querySelector('#file-input').value;
+          document.querySelector('#selected-file').style.display = 'inherit';
+          document.querySelector('#filetypes').style.display = 'none';
+        }
+      });
+
+      // Don't submit without file
       document.querySelector('#creation-form').addEventListener('submit', () => {
         return fileSelected();
       });
