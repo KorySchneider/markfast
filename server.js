@@ -23,11 +23,14 @@ app.post('/create', (req, res) => {
     if (err == null) {
       const col = db.collection('sites');
       col.insert({ content: req.files.mdFile.data.toString() }, (err, docs) => {
-        let createdID = docs.insertedIds[0];
-        res.send(`Created document: ${createdID}`);
+        if (err == null) {
+          let createdID = docs.insertedIds[0];
+          res.send(`Created document: ${createdID}`);
+        } else
+          console.log(`Creation error: ${err}`);
       });
     } else {
-      console.log(`Creation error: ${err}`);
+      console.log(`Connection error: ${err}`);
     }
 
     db.close();
@@ -41,15 +44,14 @@ app.get('/render/:id', (req, res) => {
       const col = db.collection('sites');
       col.findOne({ _id: id }, {}, (err, doc) => {
         if (err == null) {
-          console.log('doc' + doc);
-          res.send(markdown.toHTML(doc.content));
+          res.send(markdown.render(doc.content));
         } else {
           console.log(`Render error: ${err}`);
           res.send('Not found :^(');
         }
       });
     } else {
-      console.log(err);
+      console.log(`Connection error: ${err}`);
     }
     db.close();
   });
