@@ -90,7 +90,7 @@ app.get('/render/:id', (req, res) => {
         text-align: center;
       }
       a {
-        color: #B1CC74;
+        color: #202020;
       }
       a:visited {
         color: #303030;
