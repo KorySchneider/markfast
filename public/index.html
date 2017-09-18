@@ -138,7 +138,7 @@
       // When file selected, display selected file and hide filetype message
       document.querySelector('#file-input').addEventListener('change', () => {
         if (fileSelected()) {
-          document.querySelector('#selected-file > p').innerText = document.querySelector('#file-input').value;
+          document.querySelector('#selected-file > p').innerText = document.querySelector('#file-input').files[0].name;
           document.querySelector('#selected-file').style.display = 'inherit';
           document.querySelector('#selected-file').style.visibility = 'visible';
           document.querySelector('#filetypes').style.display = 'none';
