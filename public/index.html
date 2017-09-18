@@ -21,7 +21,6 @@
       #wrapper {
         width: auto;
         margin: auto;
-        margin-top: 12vh;
         font-size: 1.15em;
         text-align: center;
         width: 170px;
@@ -37,7 +36,7 @@
       }
       .btn {
         padding: 10px 15px;
-        margin-top: 14vh;
+        margin-top: 10vh;
         border-radius: 4px;
         background-color: #ACCC61;
         cursor: pointer;
@@ -60,14 +59,28 @@
       #selected-file {
         display: none;
       }
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 50px;
+        background-color: #829399;
+        font-family: monospace;
+        font-size: 1.3em;
+        box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+      }
+      header > a {
+        color: #303030;
+        text-decoration: none;
+      }
 
       /* Desktop */
       @media screen and (min-width: 768px) {
         #wrapper {
           margin-top: 25vh;
-        }
-        .btn {
-          margin-top: 10vh;
         }
         .btn:hover {
           box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -84,6 +97,10 @@
   </head>
 
   <body>
+    <header>
+      <a href='/'>marksite</a>
+    </header>
+
     <div id='wrapper'>
       <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
 
