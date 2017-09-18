@@ -34,6 +34,7 @@
     "markdown-it-katex": "^2.0.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
-    "mongodb": "^2.2.31"
+    "mongodb": "^2.2.31",
+    "nunjucks": "^3.0.1"
   }
 }

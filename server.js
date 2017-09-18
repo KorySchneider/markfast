@@ -1,6 +1,7 @@
 'use strict';
 
 const express     = require('express'),
+      nunjucks    = require('nunjucks'),
       fileUpload  = require('express-fileupload'),
       bodyParser  = require('body-parser'),
       MongoClient = require('mongodb').MongoClient,
