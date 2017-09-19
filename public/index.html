@@ -92,8 +92,11 @@
         label[for='file-input']:hover ~ #filetypes {
           visibility: inherit;
         }
+        header {
+          height: 90px;
+        }
         header > a {
-          font-size: 2em;
+          font-size: 3em;
         }
       }
     </style>
@@ -109,28 +112,16 @@
 
         <label for='file-input'>
           <div class='btn'>
-            1. Select File
+            Select File
             <input type='file' id='file-input' name='mdFile'
               accept='.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt' hidden/>
           </div>
         </label>
 
-        <div id='selected-file' class='msg'>
-          <b>Selected File</b><br>
-          <p></p>
-        </div>
-
         <div id='filetypes' class='msg'>
           <b>Accepted Filetypes</b><br>
           <p>.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt</p>
         </div>
-
-        <label for='create-btn'>
-          <div class='btn'>
-            2. Create Site
-            <button type='submit' id='create-btn' hidden></button>
-          </div>
-        </label>
 
       </form>
     </div>
@@ -138,28 +129,12 @@
 
   <script>
     window.onload = function() {
-      // When file selected, display selected file and hide filetype message
+      // Submit form when a file is selected
       document.querySelector('#file-input').addEventListener('change', () => {
-        if (fileSelected()) {
-          document.querySelector('#selected-file > p').innerText = document.querySelector('#file-input').files[0].name;
-          document.querySelector('#selected-file').style.display = 'inherit';
-          document.querySelector('#selected-file').style.visibility = 'visible';
-          document.querySelector('#filetypes').style.display = 'none';
+        if (document.querySelector('#file-input').value != '') {
+          document.querySelector('#creation-form').submit();
         }
       });
-
-      // Don't submit without file
-      document.querySelector('#creation-form').addEventListener('submit', () => {
-        return fileSelected();
-      });
-
-      document.querySelector('label[for="create-btn"]').addEventListener('click', () => {
-        return fileSelected();
-      });
-    }
-
-    function fileSelected() {
-      return (document.querySelector('#file-input').value != '');
     }
   </script>
 </html>
