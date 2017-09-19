@@ -4,7 +4,7 @@
   "description": "Static sites from markdown files",
   "main": "server.js",
   "scripts": {
-    "install": "mkdir data",
+    "install": "mkdir -p data",
     "db": "mongod --dbpath=data",
     "start": "node server.js"
   },
