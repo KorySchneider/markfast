@@ -21,9 +21,13 @@
       #wrapper {
         width: auto;
         margin: auto;
-        font-size: 1.15em;
+        font-size: 1.5em;
         text-align: center;
-        width: 170px;
+        max-width: 220px;
+      }
+      #help-text {
+        font-family: sans-serif;
+        font-size: 0.75em;
       }
       label {
         cursor: pointer;
@@ -36,7 +40,7 @@
       }
       .btn {
         padding: 10px 15px;
-        margin-top: 10vh;
+        margin-top: 40px;
         border-radius: 4px;
         background-color: #ACCC61;
         cursor: pointer;
@@ -48,7 +52,7 @@
       }
       .msg {
         margin: auto;
-        margin-top: 15px;
+        margin-top: 20px;
         padding: 5px;
         font-size: 12px;
         text-align: center;
@@ -108,8 +112,10 @@
     </header>
 
     <div id='wrapper'>
-      <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
 
+      <p id='help-text'>Upload a markdown file to get a unique link at which the file will be rendered:</p>
+
+      <form id='creation-form' action='/create' method='POST' encType='multipart/form-data'>
         <label for='file-input'>
           <div class='btn'>
             Select File
@@ -122,8 +128,8 @@
           <b>Accepted Filetypes</b><br>
           <p>.markdown, .mdown, .mkdn, .mdwn, .mkd, .md, .txt</p>
         </div>
-
       </form>
+
     </div>
   </body>
 
