@@ -1,5 +1,5 @@
 {
-  "name": "marksite",
+  "name": "markfast",
   "version": "1.0.0",
   "description": "Static sites from markdown files",
   "main": "server.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/koryschneider/marksite.git"
+    "url": "git+https://github.com/koryschneider/markfast.git"
   },
   "keywords": [
     "markdown",
@@ -19,9 +19,9 @@
   "author": "Kory Schneider",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/koryschneider/marksite/issues"
+    "url": "https://github.com/koryschneider/markfast/issues"
   },
-  "homepage": "https://github.com/koryschneider/marksite#readme",
+  "homepage": "https://github.com/koryschneider/markfast#readme",
   "dependencies": {
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
