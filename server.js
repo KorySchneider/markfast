@@ -65,7 +65,7 @@ app.post('/create', (req, res) => {
 });
 
 app.get('/render/:id', (req, res) => {
-  let id = new ObjectId(req.params.id); // TODO this throws an error but works
+  let id = new ObjectId(req.params.id);
   MongoClient.connect(DB_URL, (err, db) => {
     if (err == null) {
       const col = db.collection('sites');
