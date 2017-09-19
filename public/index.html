@@ -3,31 +3,24 @@
   <head>
     <title>markfast</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'/>
+    <link rel='stylesheet' href='/css/style.css'>
     <style>
-      html, body {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-      }
       body {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-family: sans-serif;
-        color: #303030;
-        background-color: #E0DDCF;
       }
       #wrapper {
         width: auto;
         margin: auto;
-        font-size: 1.5em;
+        /*font-size: 1.5em;*/
         text-align: center;
         max-width: 220px;
       }
       #help-text {
-        font-family: sans-serif;
-        font-size: 0.75em;
+        /*font-size: 0.75em;*/
+        font-size: 1.15em;
       }
       label {
         cursor: pointer;
@@ -46,6 +39,7 @@
         cursor: pointer;
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
         transition-duration: 0.2s;
+        font-size: 1.5em;
       }
       .btn:active {
         box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -60,23 +54,6 @@
       .msg > p {
         margin-top: 3px;
       }
-      header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        width: 100vw;
-        height: 60px;
-        background-color: #829399;
-        box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
-      }
-      header > a {
-        color: #303030;
-        text-decoration: none;
-        font-family: monospace;
-        font-size: 2em;
-      }
 
       /* Desktop */
       @media screen and (min-width: 768px) {
@@ -89,12 +66,6 @@
         }
         label[for='file-input']:hover ~ #filetypes {
           visibility: inherit;
-        }
-        header {
-          height: 90px;
-        }
-        header > a {
-          font-size: 3em;
         }
       }
     </style>
