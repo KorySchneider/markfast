@@ -2,6 +2,7 @@
   --color-bg: #e0ddcf;
   --color-text: #303030;
   --color-header: #829399;
+  --trans-dur: 0.15s;
 }
 
 html, body {
@@ -14,13 +15,14 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   font-family: sans-serif;
+  transition-duration: var(--trans-dur);
 }
 
 header {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100vw;
   height: 60px;
@@ -41,5 +43,9 @@ header > a {
   }
   header > a {
     font-size: 3em;
+    transition-duration: var(--trans-dur);
+  }
+  header > a:hover {
+    font-size: 3.15em;
   }
 }
