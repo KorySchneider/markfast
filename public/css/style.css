@@ -37,6 +37,22 @@ header > a {
   text-decoration: none;
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  font-size: 0.75em;
+}
+
+footer a {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 769px) {
   header {
     height: 90px;
