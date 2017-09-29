@@ -6,7 +6,7 @@ const express     = require('express'),
       bodyParser  = require('body-parser'),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
-      IP          = '165.227.11.100',
+      HOSTNAME    = '165.227.11.100',
       PORT        = 80,
       DB_URL      = 'mongodb://localhost:27017/markfast',
       app         = express(),
@@ -90,6 +90,6 @@ app.get('/render/:id', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, HOSTNAME, () => {
   console.log(`Listening on port ${PORT}...`);
 });
