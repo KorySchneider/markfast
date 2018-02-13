@@ -1,9 +1,11 @@
 'use strict';
 
-const express     = require('express'),
+const https       = require('https'),
+      express     = require('express'),
       nunjucks    = require('nunjucks'),
       fileUpload  = require('express-fileupload'),
       bodyParser  = require('body-parser'),
+      fs          = require('fs'),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
       HOSTNAME    = '165.227.11.100',
@@ -93,3 +95,8 @@ app.get('/render/:id', (req, res) => {
 app.listen(PORT, HOSTNAME, () => {
   console.log(`Listening on port ${PORT}...`);
 });
+
+https.createServer({
+  cert: fs.readFileSync(__dirname + '/https/cert.pem'),
+  key: fs.readFileSync(__dirname + '/https/key.pem')
+}, app).listen(443);
