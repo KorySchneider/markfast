@@ -1,6 +1,9 @@
 # MongoDB
 data/
 
+# HTTPS Certification
+https/
+
 # Logs
 logs
 *.log
