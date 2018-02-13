@@ -1,6 +1,7 @@
 'use strict';
 
 const https       = require('https'),
+      helmet      = require('helmet'),
       express     = require('express'),
       nunjucks    = require('nunjucks'),
       fileUpload  = require('express-fileupload'),
@@ -38,6 +39,7 @@ const https       = require('https'),
                     .use(require('markdown-it-katex'));
 
 app.use(express.static(__dirname + '/public'));
+app.use(helmet());
 app.use(fileUpload());
 app.use(bodyParser.urlencoded({ extended: false }));
 
