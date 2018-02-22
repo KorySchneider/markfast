@@ -1,7 +1,6 @@
 'use strict';
 
-const https       = require('https'),
-      helmet      = require('helmet'),
+const helmet      = require('helmet'),
       express     = require('express'),
       nunjucks    = require('nunjucks'),
       fileUpload  = require('express-fileupload'),
@@ -9,8 +8,10 @@ const https       = require('https'),
       fs          = require('fs'),
       MongoClient = require('mongodb').MongoClient,
       ObjectId    = require('mongodb').ObjectId,
-      HOSTNAME    = '165.227.11.100',
-      PORT        = 8080,
+      HOSTNAME    = '127.0.0.1',
+      PORT        = 7687,
+      //HOSTNAME    = '165.227.11.100',
+      //PORT        = 80,
       DB_URL      = 'mongodb://localhost:27017/markfast',
       app         = express(),
       hljs        = require('highlight.js'),
@@ -97,8 +98,3 @@ app.get('/render/:id', (req, res) => {
 app.listen(PORT, HOSTNAME, () => {
   console.log(`Listening on port ${PORT}...`);
 });
-
-https.createServer({
-  cert: fs.readFileSync(__dirname + '/https/cert.pem'),
-  key: fs.readFileSync(__dirname + '/https/key.pem')
-}, app).listen(443);
