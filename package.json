@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/koryschneider/markfast#readme",
   "dependencies": {
-    "body-parser": "^1.18.1",
-    "express": "^4.15.4",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "express-fileupload": "^0.2.0",
     "helmet": "^3.11.0",
     "highlight.js": "^9.12.0",
